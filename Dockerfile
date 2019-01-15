@@ -1,6 +1,8 @@
 FROM ubuntu:16.04
 MAINTAINER csardas gan <csardas@gmail.com>
 
+ENV DEBIAN_FRONTEND noninteractive
+
 RUN sed 's/main$/main universe/' -i /etc/apt/sources.list \
  && apt-get update -y \
  && apt-get upgrade -y \
