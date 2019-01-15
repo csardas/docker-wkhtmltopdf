@@ -1,14 +1,20 @@
-FROM ubuntu:14.04
-MAINTAINER Sharoon Thomas <sharoon.thomas@openlabs.co.in>
+FROM ubuntu:16.04
+MAINTAINER csardas gan <csardas@gmail.com>
 
-RUN sed 's/main$/main universe/' -i /etc/apt/sources.list
-RUN apt-get update
-RUN apt-get upgrade -y
+RUN sed 's/main$/main universe/' -i /etc/apt/sources.list \
+ && apt-get update -y \
+ && apt-get upgrade -y \
+ \
+ # Download and install wkhtmltopdf
+ && apt-get install -y build-essential xorg libssl-dev libxrender-dev wget gdebi \
+ && wget https://downloads.wkhtmltopdf.org/0.12/0.12.5/wkhtmltox_0.12.5-1.xenial_amd64.deb \
+ && gdebi --n wkhtmltox_0.12.5-1.xenial_amd64.deb \
+ \
+ # cleanup unused pagkages
+ && apt-get clean \
+ && apt-get autoclean \
+ && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
-# Download and install wkhtmltopdf
-RUN apt-get install -y build-essential xorg libssl-dev libxrender-dev wget gdebi
-RUN wget http://downloads.sourceforge.net/project/wkhtmltopdf/0.12.2.1/wkhtmltox-0.12.2.1_linux-trusty-amd64.deb
-RUN gdebi --n wkhtmltox-0.12.2.1_linux-trusty-amd64.deb
 ENTRYPOINT ["wkhtmltopdf"]
 
 # Show the extended help
