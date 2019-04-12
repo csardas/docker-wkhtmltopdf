@@ -9,7 +9,7 @@ RUN apt-get update -y \
  \
  # Download and install wkhtmltopdf
  && apt-get install -y fonts-noto-cjk \
- && wget https://downloads.wkhtmltopdf.org/0.12/0.12.5/wkhtmltox_0.12.5-1.xenial_amd64.deb \
+ && wget https://github.com/wkhtmltopdf/wkhtmltopdf/releases/download/0.12.5/wkhtmltox_0.12.5-1.xenial_amd64.deb \
  && apt-get install -y ./wkhtmltox_0.12.5-1.xenial_amd64.deb \
  \
  # cleanup unused pagkage files
